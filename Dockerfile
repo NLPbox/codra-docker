@@ -33,21 +33,8 @@ RUN perl Makefile.PL
 # Tools/CharniakParserRerank/parse.sh: first-stage/PARSE/parseIt: 
 #     not foundsecond-stage/programs/features/best-parses: not found
 
-#root@5822a8cd5a47:/opt/Discourse_Parser_Dist/Tools/CharniakParserRerank# python setup.py install
-#Generating CharniakParser SWIG wrapper files
-#Searching for latest installed version of swig...
-#Using 'swig'
-#Running 'swig -python -c++ -module CharniakParser -Ifirst-stage/PARSE/ -Wall -builtin -outdir python/bllipparser -o first-stage/PARSE/swig/wrapper.C first-stage/PARSE/swig/wrapper.i'
-#Error while running command: Command 'swig' not found.
-#Build failed!
+WORKDIR /opt/Discourse_Parser_Dist/Tools/CharniakParserRerank
+RUN apt-get install swig && python setup.py install
 
-
-#root@5822a8cd5a47:/opt/Discourse_Parser_Dist# python Discourse_Parser.py input.txt 
-#Traceback (most recent call last):
-#  File "Discourse_Parser.py", line 5, in <module>
-#    import TopicFeatures
-#  File "/opt/Discourse_Parser_Dist/TopicFeatures.py", line 4, in <module>
-#    import nltk
-#ImportError: No module named nltk
-
-
+RUN apt-get install python-pip -y && pip install nltk && \
+    python -c "import nltk; nltk.download('wordnet')"
