@@ -34,7 +34,7 @@ RUN perl Makefile.PL
 #     not foundsecond-stage/programs/features/best-parses: not found
 
 WORKDIR /opt/Discourse_Parser_Dist/Tools/CharniakParserRerank
-RUN apt-get install swig -y && python setup.py install
+RUN apt-get install swig python-dev -y && python setup.py install
 
 RUN apt-get install python-pip -y && pip install nltk && \
     python -c "import nltk; nltk.download('wordnet')"
