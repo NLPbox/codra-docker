@@ -8,8 +8,16 @@ RUN apt-get update -y && \
     pip install nltk
 
 
+# the CODRA github repo needs git-lfs because it contains large files
+
 WORKDIR /opt
-RUN git clone https://github.com/arne-cl/codra-rst-parser.git
+RUN wget https://github.com/github/git-lfs/releases/download/v1.5.0/git-lfs-linux-amd64-1.5.0.tar.gz && \
+    tar xzf git-lfs-linux-amd64-1.5.0.tar.gz
+WORKDIR /opt/git-lfs-1.5.0
+RUN ./install.sh
+
+WORKDIR /opt
+RUN git lfs clone https://github.com/arne-cl/codra-rst-parser.git
 
 
 # install the Charniak parser (the version distributed with CODRA does not
