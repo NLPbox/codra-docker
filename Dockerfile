@@ -17,7 +17,7 @@ WORKDIR /opt/git-lfs-1.5.0
 RUN ./install.sh
 
 WORKDIR /opt
-RUN git lfs clone https://bitbucket.org/arne_cl/codra-rst-parser.git
+RUN git lfs clone https://arne_cl@bitbucket.org/arne_cl/codra-rst-parser.git
 
 
 # install the Charniak parser (the version distributed with CODRA does not
