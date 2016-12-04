@@ -8,27 +8,25 @@ RUN apt-get update -y && \
     pip install nltk
 
 
-# the CODRA github repo needs git-lfs because it contains large files
+# install the Charniak parser separately (the version distributed with CODRA
+# does not compile)
 
 WORKDIR /opt
-RUN wget https://github.com/github/git-lfs/releases/download/v1.5.0/git-lfs-linux-amd64-1.5.0.tar.gz && \
-    tar xzf git-lfs-linux-amd64-1.5.0.tar.gz
-WORKDIR /opt/git-lfs-1.5.0
-RUN ./install.sh
+git clone https://github.com/BLLIP/bllip-parser
 
-WORKDIR /opt
-RUN git lfs clone https://bitbucket.org/arne_cl/codra-rst-parser.git
+#WORKDIR /opt/codra-rst-parser/Tools/
+#RUN rm -rf CharniakParserRerank && \
+#    git clone https://github.com/BLLIP/bllip-parser CharniakParserRerank
+#WORKDIR /opt/codra-rst-parser/Tools/CharniakParserRerank
 
-
-# install the Charniak parser (the version distributed with CODRA does not
-# compile)
-
-WORKDIR /opt/codra-rst-parser/Tools/
-RUN rm -rf CharniakParserRerank && \
-    git clone https://github.com/BLLIP/bllip-parser CharniakParserRerank
-
-WORKDIR /opt/codra-rst-parser/Tools/CharniakParserRerank
+WORKDIR /opt/bllip-parser
 RUN make && python setup.py install
+
+
+
+WORKDIR /opt
+# I put the repo on sourceforge because of github's file size restrictions
+RUN git clone ssh://arne-cl@git.code.sf.net/p/codra-rst-parser/code codra-rst-parser
 
 
 # install WordNet tools (wordnet itself is part of science-linguistics)
