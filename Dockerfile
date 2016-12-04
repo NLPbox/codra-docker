@@ -26,7 +26,7 @@ RUN make && python setup.py install
 
 WORKDIR /opt
 # I put the repo on sourceforge because of github's file size restrictions
-RUN git clone ssh://arne-cl@git.code.sf.net/p/codra-rst-parser/code codra-rst-parser
+RUN git clone git://git.code.sf.net/p/codra-rst-parser/code codra-rst-parser
 
 
 # install WordNet tools (wordnet itself is part of science-linguistics)
