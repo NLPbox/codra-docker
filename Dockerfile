@@ -12,7 +12,7 @@ RUN apt-get update -y && \
 # does not compile)
 
 WORKDIR /opt
-git clone https://github.com/BLLIP/bllip-parser
+RUN git clone https://github.com/BLLIP/bllip-parser
 
 #WORKDIR /opt/codra-rst-parser/Tools/
 #RUN rm -rf CharniakParserRerank && \
