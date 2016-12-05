@@ -45,3 +45,6 @@ RUN perl Makefile.PL && make && make install
 ADD input.txt /opt/codra-rst-parser/
 
 RUN pip install pudb
+
+WORKDIR /opt/codra-rst-parser
+RUN git pull
