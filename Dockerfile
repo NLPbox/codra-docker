@@ -48,3 +48,6 @@ WORKDIR /opt/codra-rst-parser
 RUN rm tmp*
 
 RUN pip install pudb
+
+RUN touch tmp_doc.prob
+ADD codra.sh /opt/codra-rst-parser/
