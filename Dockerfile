@@ -46,7 +46,7 @@ WORKDIR /opt/codra-rst-parser
 RUN rm tmp* && touch tmp_doc.prob
 
 # add test file and end-to-end parsing script
-ADD input.txt codra.sh .
+ADD input.txt codra.sh /opt/codra-rst-parser/
 
 # by default, the container will parse the test file and produce its
 # RST tree in *.dis format
