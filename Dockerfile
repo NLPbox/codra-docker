@@ -51,3 +51,4 @@ RUN git pull
 
 RUN pip install scikit-learn scipy
 RUN rm tmp*
+RUN git pull
