@@ -48,3 +48,5 @@ RUN pip install pudb
 
 WORKDIR /opt/codra-rst-parser
 RUN git pull
+
+RUN pip install scikit-learn scipy
