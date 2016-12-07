@@ -5,7 +5,7 @@ RUN apt-get update -y && \
         openjdk-8-jre \
         python-numpy python-dev python-pip \
         science-linguistics && \
-    pip install nltk
+    pip install nltk scikit-learn scipy
 
 
 # install the Charniak parser separately (the version distributed with CODRA
@@ -41,14 +41,10 @@ RUN perl Makefile.PL && make && make install
 
 
 # add test file
-
 ADD input.txt /opt/codra-rst-parser/
 
-RUN pip install pudb
 
 WORKDIR /opt/codra-rst-parser
-RUN git pull
-
-RUN pip install scikit-learn scipy
 RUN rm tmp*
-RUN git pull
+
+RUN pip install pudb
