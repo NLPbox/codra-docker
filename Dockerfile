@@ -40,14 +40,15 @@ WORKDIR /opt/codra-rst-parser/Tools/WordNet-QueryData-1.49
 RUN perl Makefile.PL && make && make install
 
 
-# add test file
-ADD input.txt /opt/codra-rst-parser/
-
-
 WORKDIR /opt/codra-rst-parser
-RUN rm tmp*
+# The CODRA source code relies on a number of hardcoded paths / temporary
+# files, e.g. without tmp_doc.prob, Discourse_Parser.py won't run.
+RUN rm tmp* && touch tmp_doc.prob
 
-RUN pip install pudb
+# add test file and end-to-end parsing script
+ADD input.txt codra.sh .
 
-RUN touch tmp_doc.prob
-ADD codra.sh /opt/codra-rst-parser/
+# by default, the container will parse the test file and produce its
+# RST tree in *.dis format
+ENTRYPOINT ["./codra.sh"]
+CMD ["input.txt"]
