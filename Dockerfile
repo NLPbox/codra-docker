@@ -5,7 +5,7 @@ RUN apt-get update -y && \
         openjdk-8-jre \
         python-numpy python-dev python-pip \
         science-linguistics && \
-    pip install nltk scikit-learn scipy
+    pip install nltk==3.2.1 scikit-learn==0.18.1 scipy==0.18.1
 
 # The Charniak parser version distributed with CODRA does not compile,
 # but we can't simply replace it, because it was modified by the CODRA authors
