@@ -21,7 +21,7 @@ WORKDIR /opt/bllip-parser
 # To make the Charniak parser build process fully reproducible, we will
 # build a specific commit (i.e. the most recent commit
 # available on 2016-12-08).
-RUN git checkout 1b223fc0cdd391aac6ba6630978e4a0d8b491031
+RUN git checkout -b codra-docker 1b223fc0cdd391aac6ba6630978e4a0d8b491031
 RUN make && python setup.py install
 
 
