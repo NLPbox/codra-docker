@@ -7,25 +7,28 @@ RUN apt-get update -y && \
         science-linguistics && \
     pip install nltk scikit-learn scipy
 
-
-# install the Charniak parser separately (the version distributed with CODRA
-# does not compile)
+# The Charniak parser version distributed with CODRA does not compile,
+# but we can't simply replace it, because it was modified by the CODRA authors
+# (at least parse.sh). For the sake of modifying CODRA as little as possible,
+# we will build a newer version of the parser in a different directory,
+# but keep using all the (modified?) Charniak parser resources provided
+# in the CODRA source tree.
 
 WORKDIR /opt
 RUN git clone https://github.com/BLLIP/bllip-parser
-
-#WORKDIR /opt/codra-rst-parser/Tools/
-#RUN rm -rf CharniakParserRerank && \
-#    git clone https://github.com/BLLIP/bllip-parser CharniakParserRerank
-#WORKDIR /opt/codra-rst-parser/Tools/CharniakParserRerank
-
 WORKDIR /opt/bllip-parser
+
+# To make the Charniak parser build process fully reproducible, we will
+# build a specific commit (i.e. the most recent commit
+# available on 2016-12-08).
+RUN git checkout 1b223fc0cdd391aac6ba6630978e4a0d8b491031
 RUN make && python setup.py install
 
 
 
 WORKDIR /opt
 # I put the repo on sourceforge because of github's file size restrictions
+# and low LFS quota for free accounts.
 RUN git clone git://git.code.sf.net/p/codra-rst-parser/code codra-rst-parser
 
 
