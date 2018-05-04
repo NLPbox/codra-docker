@@ -7,4 +7,4 @@ install:
   - docker build -t codra .
 
 script:
-  - docker run --entrypoint=/bin/bash -ti codra -c python test_codra.py
+  - docker run --entrypoint=/usr/bin/python -ti codra test_codra.py
