@@ -51,7 +51,7 @@ RUN rm tmp* && touch tmp_doc.prob
 # add test file and end-to-end parsing script
 ADD input*.txt codra.sh test_codra.py /opt/codra-rst-parser/
 
-RUN pip install pytest==3.5.1 sh==1.12.14
+RUN pip install sh==1.12.14
 
 # by default, the container will parse the test file and produce its
 # RST tree in *.dis format

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author: Arne Neumann <nlpbox.programming@arne.cl>
 
-import pytest
 import sh
+import sys
 
 
 EXPECTED_OUTPUT = """( Root (span 1 2)
@@ -12,10 +12,15 @@ EXPECTED_OUTPUT = """( Root (span 1 2)
 )
 """
 
-
 def test_codra():
     """The DPLP parser produces the expected output."""
     parser = sh.Command('./codra.sh')
     result = parser('input_short.txt')
-    assert result.stdout == EXPECTED_OUTPUT, result.stderr.encode('utf-8')
+    return result.stdout == EXPECTED_OUTPUT, result.stderr.encode('utf-8')
+
+if __name__ == '__main__':
+    passed, err = test_codra()
+    if not passed:
+        sys.stderr.write("test_codra(): '{}' does not match expected output.\n".format(err))
+        sys.exit(1)
 
