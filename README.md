@@ -1,5 +1,8 @@
 # codra-docker
 
+[![Travis Build Status](https://travis-ci.org/NLPbox/codra-docker.svg?branch=master)](https://travis-ci.org/NLPbox/codra-docker)
+[![Docker Build Status](https://img.shields.io/docker/build/nlpbox/codra.svg)](https://hub.docker.com/r/nlpbox/codra/)
+
 This docker container allows you to build, install and run the
 [CODRA RST discourse parser](http://alt.qcri.org/tools/discourse-parser/)
 (Joty et al. 2015) in a docker container.
