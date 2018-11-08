@@ -1,29 +1,13 @@
-FROM nlpbox/nlpbox-base:16.04
+FROM nlpbox/charniak:2018-05-02
 
 RUN apt-get update -y && \
-    apt-get install -y build-essential flex swig \
+    apt-get install -y git build-essential \
         openjdk-8-jre \
         python-numpy python-dev python-pip \
         science-linguistics && \
     pip install nltk==3.2.1 scikit-learn==0.18.1 scipy==0.18.1
 
-# The Charniak parser version distributed with CODRA does not compile,
-# but we can't simply replace it, because it was modified by the CODRA authors
-# (at least parse.sh). For the sake of modifying CODRA as little as possible,
-# we will build a newer version of the parser in a different directory,
-# but keep using all the (modified?) Charniak parser resources provided
-# in the CODRA source tree.
-
-WORKDIR /opt
-RUN git clone https://github.com/BLLIP/bllip-parser
-WORKDIR /opt/bllip-parser
-
-# To make the Charniak parser build process fully reproducible, we will
-# build a specific commit (i.e. the most recent commit
-# available on 2016-12-08).
-RUN git checkout -b codra-docker 1b223fc0cdd391aac6ba6630978e4a0d8b491031
-RUN make && python setup.py install
-
+# RUN rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR /opt
